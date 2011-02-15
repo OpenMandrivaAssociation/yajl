@@ -1,7 +1,7 @@
 %define major 1
 %define libname %mklibname yajl %{major}
 %define develname %mklibname yajl -d
-%define staticdevelname %mklibname paper -d -s
+%define staticdevelname %mklibname yajl -d -s
 
 # NB, upstream does not provide pre-built tar.gz downloads. Instead
 # they make you use the 'on the fly' generated tar.gz from GITHub's
@@ -57,8 +57,8 @@ This package contains YAJL libraries files.
 %package -n	%{develname}
 Summary:	YAJL development files
 Group:		Development/C
-Provides:	libyajl-devel
-Requires:	%{name} = %{version}-%{release}
+Provides:	libyajl-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
 
 %description -n	%{develname}
 YAJL is a Portable JSON parsing and serialization library in ANSI
