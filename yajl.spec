@@ -25,7 +25,7 @@
 
 Name:		yajl
 Version:	1.0.11
-Release:	%mkrel 1
+Release:	%mkrel 2
 Summary:	Yet Another JSON Library (YAJL)
 License:	BSD
 Group:		System/Libraries
