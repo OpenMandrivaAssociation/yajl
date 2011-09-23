@@ -1,5 +1,6 @@
 Name:		yajl
 Version:	1.0.11
+%define	subrel	1
 Release:	%mkrel 4
 Summary:	Yet Another JSON Library (YAJL)
 
@@ -17,6 +18,13 @@ BuildRequires:	cmake
 Summary:	Libraries, includes, etc to develop with YAJL
 Requires:	%{name} = %{version}-%{release}
 
+%package        utils
+Summary:	YAJL binary utils for json files
+Requires:	%{name} = %{version}
+Group:		Development/C
+Requires:	%{name} = %{version}-%{release}
+
+
 %description
 Yet Another JSON Library. YAJL is a small event-driven
 (SAX-style) JSON parser written in ANSI C, and a small
@@ -27,8 +35,15 @@ Yet Another JSON Library. YAJL is a small event-driven
 (SAX-style) JSON parser written in ANSI C, and a small
 validating JSON generator.
 
+%description    utils
+YAJL is a Portable JSON parsing and serialization library in ANSI
+C. It's event-driven (SAX-style) and also a small validating JSON
+generator.
+
 This sub-package provides the libraries and includes
 necessary for developing against the YAJL library
+
+
 
 %prep
 %setup -q -n lloyd-%{name}-%{githash}
@@ -74,6 +89,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/json_verify
 %{_libdir}/libyajl.so.1
 %{_libdir}/libyajl.so.1.*
+
+
+%files -n %{name}-utils
+%defattr(-,root,root)
+
 
 %files devel
 %defattr(-,root,root,-)
