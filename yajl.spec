@@ -1,106 +1,68 @@
+%define git fee1ebe
+%define major 2
+%define libname %mklibname %{name} %{major}
+%define devname %mklibname -d %{name}
+
 Name:		yajl
-Version:	1.0.11
-%define	subrel	1
-Release:	%mkrel 4
-Summary:	Yet Another JSON Library (YAJL)
-
+Version:	2.0.4
+Release:	%mkrel 1
+Summary:	Yet Another JSON Library
+License:	ISC License
 Group:		System/Libraries
-License:	BSD
-URL:		http://lloyd.github.com/yajl/
-
-%define		githash	f4baae0
-Source0:	lloyd-%{name}-%{version}-0-g%{githash}.tar.gz
-
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Url:		http://lloyd.github.com/yajl/
+Source0:	lloyd-%{name}-%{version}-0-g%{git}.tar.gz
+BuildRequires:	doxygen
 BuildRequires:	cmake
-
-%package devel
-Summary:	Libraries, includes, etc to develop with YAJL
-Requires:	%{name} = %{version}-%{release}
-
-%package        utils
-Summary:	YAJL binary utils for json files
-Requires:	%{name} = %{version}
-Group:		Development/C
-Requires:	%{name} = %{version}-%{release}
-
+Requires:	%{libname} = %{EVRD}
 
 %description
-Yet Another JSON Library. YAJL is a small event-driven
-(SAX-style) JSON parser written in ANSI C, and a small
-validating JSON generator.
+Yet Another JSON Library. YAJL is a small event-driven (SAX-style) JSON parser
+written in ANSI C, and a small validating JSON generator. YAJL is released
+under the ISC license.
 
-%description devel
-Yet Another JSON Library. YAJL is a small event-driven
-(SAX-style) JSON parser written in ANSI C, and a small
-validating JSON generator.
+%package -n %{libname}
+Summary:	%{summary}
+Provides:	lib%{name}
 
-%description    utils
-YAJL is a Portable JSON parsing and serialization library in ANSI
-C. It's event-driven (SAX-style) and also a small validating JSON
-generator.
+%description -n %{libname}
+Yet Another JSON Library. YAJL is a small event-driven (SAX-style) JSON parser
+written in ANSI C, and a small validating JSON generator. YAJL is released
+under the ISC license.
 
-This sub-package provides the libraries and includes
-necessary for developing against the YAJL library
+%package -n %{devname}
+Summary:	Development files for using %{name}
+Group:		Development/C
+Provides:	%{name}-devel = %{EVRD}
+Requires:	%{libname} = %{EVRD}
 
-
+%description -n %{devname}
+Development files for using %{name}
 
 %prep
-%setup -q -n lloyd-%{name}-%{githash}
+%setup -q -n lloyd-%{name}-%{git}
 
 %build
-# NB, we are not using upstream's 'configure'/'make'
-# wrapper, instead we use cmake directly to better
-# align with Fedora standards
-
-#mkdir build
-#cd build
-%cmake ..
-make VERBOSE=1 %{?_smp_mflags}
-
+%cmake
+%make
 
 %install
-rm -rf $RPM_BUILD_ROOT
-cd build
-make install DESTDIR=$RPM_BUILD_ROOT
-mv $RPM_BUILD_ROOT%{_includedir}/yajl/yajl_version.h.cmake \
-  $RPM_BUILD_ROOT%{_includedir}/yajl/yajl_version.h
+%__rm -rf %{buildroot}
+%makeinstall_std -C build
 
-
-# No static libraries
-rm -f $RPM_BUILD_ROOT%{_libdir}/libyajl_s.a
-
-
-%check
-cd test
-./run_tests.sh
+%__rm -f %{buildroot}%{_libdir}/*.a
 
 %clean
-rm -rf $RPM_BUILD_ROOT
-
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%__rm -rf %{buildroot}
 
 %files
-%defattr(-,root,root,-)
-%doc COPYING ChangeLog README TODO
 %{_bindir}/json_reformat
 %{_bindir}/json_verify
-%{_libdir}/libyajl.so.1
-%{_libdir}/libyajl.so.1.*
 
+%files -n %{libname}
+%{_libdir}/libyajl.so.*
 
-%files -n %{name}-utils
-%defattr(-,root,root)
-
-
-%files devel
-%defattr(-,root,root,-)
-%doc COPYING
-%dir %{_includedir}/yajl
-%{_includedir}/yajl/yajl_common.h
-%{_includedir}/yajl/yajl_gen.h
-%{_includedir}/yajl/yajl_parse.h
-%{_includedir}/yajl/yajl_version.h
+%files -n %{devname}
 %{_libdir}/libyajl.so
+%{_includedir}/yajl
+%{_datadir}/pkgconfig/yajl.pc
+
