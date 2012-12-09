@@ -66,3 +66,32 @@ Development files for using %{name}
 %{_includedir}/yajl
 %{_datadir}/pkgconfig/yajl.pc
 
+
+
+%changelog
+* Mon Mar 26 2012 Andrey Bondrov <abondrov@mandriva.org> 2.0.4-1mdv2012.0
++ Revision: 786878
+- New version 2.0.4, new library major 2
+
+* Fri Sep 23 2011 Alexander Barakin <abarakin@mandriva.org> 1.0.11-4.1
++ Revision: 701106
+- back compat to yajl-utils (fix #64225 #64302)
+
+* Wed Sep 21 2011 Alexander Barakin <abarakin@mandriva.org> 1.0.11-4
++ Revision: 700747
+- imported package yajl
+
+* Sun Feb 27 2011 Funda Wang <fwang@mandriva.org> 1.0.11-3
++ Revision: 640470
+- rebuild to obsolete old packages
+
+* Fri Feb 18 2011 Joao Victor Duarte Martins <jvdm@mandriva.com.br> 1.0.11-2
++ Revision: 638321
+- fix static lib package name
+- fix provides/requires of devel package
+
+* Tue Feb 15 2011 Joao Victor Duarte Martins <jvdm@mandriva.com.br> 1.0.11-1
++ Revision: 637854
+- First initial release.
+- create yajl
+
