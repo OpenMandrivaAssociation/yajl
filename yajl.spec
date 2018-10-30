@@ -5,7 +5,7 @@
 
 Name:		yajl
 Version:	2.0.4
-Release:	9
+Release:	10
 Summary:	Yet Another JSON Library
 License:	ISC License
 Group:		System/Libraries
