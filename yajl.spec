@@ -4,8 +4,8 @@
 %define devname %mklibname -d %{name}
 
 Name:		yajl
-Version:	2.0.4
-Release:	10
+Version:	2.1.0
+Release:	1
 Summary:	Yet Another JSON Library
 License:	ISC License
 Group:		System/Libraries
@@ -43,11 +43,11 @@ Development files for using %{name}
 
 %build
 %cmake
-%make
+%make_build
 
 %install
 %__rm -rf %{buildroot}
-%makeinstall_std -C build
+%make_install -C build
 
 %__rm -f %{buildroot}%{_libdir}/*.a
 
