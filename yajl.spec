@@ -10,7 +10,7 @@ Summary:	Yet Another JSON Library
 License:	ISC License
 Group:		System/Libraries
 Url:		http://lloyd.github.com/yajl/
-Source0:	lloyd-%{name}-%{version}-0-g%{git}.tar.gz
+Source0:	%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
 BuildRequires:	cmake
 Requires:	%{libname} = %{EVRD}
@@ -39,7 +39,7 @@ Requires:	%{libname} = %{EVRD}
 Development files for using %{name}
 
 %prep
-%setup -q -n lloyd-%{name}-%{git}
+%setup -q -n %{name}-%{version}
 
 %build
 %cmake
