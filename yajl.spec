@@ -4,13 +4,13 @@
 %define devname %mklibname -d %{name}
 
 Name:		yajl
-Version:	2.0.4
-Release:	10
+Version:	2.1.0
+Release:	1
 Summary:	Yet Another JSON Library
 License:	ISC License
 Group:		System/Libraries
 Url:		http://lloyd.github.com/yajl/
-Source0:	lloyd-%{name}-%{version}-0-g%{git}.tar.gz
+Source0:	%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
 BuildRequires:	cmake
 Requires:	%{libname} = %{EVRD}
@@ -39,15 +39,15 @@ Requires:	%{libname} = %{EVRD}
 Development files for using %{name}
 
 %prep
-%setup -q -n lloyd-%{name}-%{git}
+%setup -q -n %{name}-%{version}
 
 %build
 %cmake
-%make
+%make_build
 
 %install
 %__rm -rf %{buildroot}
-%makeinstall_std -C build
+%make_install -C build
 
 %__rm -f %{buildroot}%{_libdir}/*.a
 
