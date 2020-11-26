@@ -5,12 +5,12 @@
 
 Name:		yajl
 Version:	2.1.0
-Release:	1
+Release:	2
 Summary:	Yet Another JSON Library
 License:	ISC License
 Group:		System/Libraries
 Url:		http://lloyd.github.com/yajl/
-Source0:	%{name}-%{version}.tar.gz
+Source0:	http://github.com/lloyd/yajl/tarball/%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
 BuildRequires:	cmake
 Requires:	%{libname} = %{EVRD}
