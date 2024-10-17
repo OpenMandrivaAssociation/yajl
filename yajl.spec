@@ -9,7 +9,7 @@ Release:	3
 Summary:	Yet Another JSON Library
 License:	ISC License
 Group:		System/Libraries
-Url:		http://lloyd.github.com/yajl/
+Url:		https://lloyd.github.com/yajl/
 Source0:	http://github.com/lloyd/yajl/tarball/%{name}-%{version}.tar.gz
 BuildRequires:	doxygen
 BuildRequires:	cmake
